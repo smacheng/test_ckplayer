@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import mx.controls.Alert;
+			
+			import org.mangui.hls.HLS;
+			import org.mangui.hls.event.HLSEvent;
+			
+			private var hls : HLS = null;
+			private var my_video : Video = null;
+			
+			private var timer:Timer=new Timer(500);
+			
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				hls = new HLS();
+				hls.stage=this.stage;
+				my_video = new Video(320, 240);
+				video.addChild(my_video);
+				my_video.x = 0;
+				my_video.y = 0;
+				my_video.smoothing = true;
+				my_video.attachNetStream(hls.stream);
+				hls.addEventListener(HLSEvent.MANIFEST_LOADED, manifestHandler); //加载成功
+				hls.load("aaa/index.m3u8");
+				
+				timer.addEventListener(TimerEvent.TIMER,gethlsinfo);
+				timer.start();
+				
+				//Alert.show("11");
+				//bc.add(video);
+			}
+			
+			public function manifestHandler(event : HLSEvent) : void {
+				trace(event);
+				//Alert.show("00");
+				hls.stream.play(null, -1);
+			}
+			
+			private function gethlsinfo(event:TimerEvent):void
+			{
+				lbl_state.text="playbackState="+hls.playbackState;
+				lbl_state0.text="bufferLength="+hls.bufferLength.toString();
+				lbl_state1.text="position="+hls.position.toString();
+				lbl_state2.text="seeklevel="+hls.seeklevel.toString();
+				lbl_state3.text="seekState="+hls.seekState.toString();
+				lbl_state4.text="URLstream="+hls.URLstream.toString();
+				lbl_state5.text="playbacklevel="+hls.playbacklevel.toString();
+				lbl_state6.text="bufferLength="+hls.stream.bufferLength.toString();
+			}
+			
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				hls.stream.seek(Number(txt_num.text));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:VideoDisplay id="video" x="0" y="0" width="608" height="388"/>
+	<s:Button x="16" y="403" label="加载" click="button1_clickHandler(event)"/>	
+	<s:Button x="116" y="403" label="跳转" click="button2_clickHandler(event)"/>
+	<s:TextInput id="txt_num" x="201" y="404"/>
+	<s:Label id="lbl_state" x="14" y="439" text="标签"/>
+	<s:Label id="lbl_state0" x="14" y="454" text="标签"/>
+	<s:Label id="lbl_state1" x="14" y="469" text="标签"/>
+	<s:Label id="lbl_state2" x="14" y="483" text="标签"/>
+	<s:Label id="lbl_state3" x="14" y="498" text="标签"/>
+	<s:Label id="lbl_state4" x="14" y="513" text="标签"/>
+	<s:Label id="lbl_state5" x="14" y="528" text="标签"/>
+	<s:Label id="lbl_state6" x="14" y="543" text="标签"/>
+</s:Application>

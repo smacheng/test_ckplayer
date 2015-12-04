@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Info>
+    <CourseInfo TotalDuration="1230760"/>
+    <SubInfo>
+        <Item Source="aaa0.mp4" StartTime="0" StopTime="198160" Duration="198160"/>
+        <Item Source="aaa1.mp4" StartTime="198160" StopTime="395360" Duration="197280"/>
+        <Item Source="aaa2.mp4" StartTime="395360" StopTime="593160" Duration="197880"/>
+        <Item Source="aaa3.mp4" StartTime="593160" StopTime="793920" Duration="200840"/>
+        <Item Source="aaa4.mp4" StartTime="793920" StopTime="992720" Duration="198880"/>
+        <Item Source="aaa5.mp4" StartTime="992720" StopTime="1192000" Duration="199360"/>
+        <Item Source="aaa6.mp4" StartTime="1192000" StopTime="1230720" Duration="38800"/>
+    </SubInfo>
+</Info>
